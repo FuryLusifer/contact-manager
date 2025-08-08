@@ -3,10 +3,12 @@ import json
 class ContactManager:
 
     def __init__(self):
-        contact_dict = []
+       self.contact_db = "contact_db.json"
+       self.contact_dict = {}
+       self.contacts = []
 
     def show_menu(self):
-        print("    ------- Contact Manager -------")
+        print("\n    ------- Contact Manager -------")
         print("1. Add new contact")
         print("2. List all contacts")
         print("3. Search contact")
@@ -18,9 +20,38 @@ class ContactManager:
         choice = input("Enter your choice: ").strip()
         return choice
     
+    def validate_contact_db(self):
+        if os.path.exists(self.contact_db):
+            with open(self.contact_db, "r") as file:
+                try:
+                    self.contacts = json.load(file)
+                except json.JSONDecodeError:
+                    self.contacts = []
+        else:
+            with open(self.contact_db, "w") as file:
+                json.dump([], file)
+            self.contacts = []
+        return True
+
+    
     def add_new_contact(self):
-        print("Pressed 1")
-        
+        if self.validate_contact_db():
+            name = input("Enter Fullname: ").title().strip()
+            number = input("Enter Phone Number: ").strip()
+            email = input("Enter email address: ").strip().lower()
+
+        new_contact = {
+            "name": name,
+            "number": number,
+            "email": email
+        }
+
+        self.contacts.append(new_contact)
+
+        with open(self.contact_db, "w") as file:
+            json.dump(self.contacts, file, indent=4)
+
+        print("Contact saved successfully.")
 
     def list_all_contacts(self):
         print("Pressed 2")
