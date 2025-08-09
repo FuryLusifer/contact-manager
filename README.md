@@ -80,7 +80,7 @@ This project is open source and free to use.
 
 ## Author
 
-[Piyush Kayastha]
+[**Piyush Kayastha**](https://github.com/FuryLusifer)
 
 ---
 
