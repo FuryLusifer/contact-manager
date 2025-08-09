@@ -80,7 +80,7 @@ This project is open source and free to use.
 
 ## Author
 
-[Your Name]
+[Piyush Kayastha]
 
 ---
 
